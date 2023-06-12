@@ -1,5 +1,6 @@
 import tkinter as tk
 import random
+import time
 
 window = tk.Tk()
 window.title("TIKTAKTOE")
@@ -10,6 +11,7 @@ turn = 0
 possible_enemy = ["player","easy","normal","hard","impossible"]
 enemy = possible_enemy[4]
 AI_played = False
+gameend = False
 
 def click(i, j):
     global turn, player, symbols
@@ -108,17 +110,17 @@ def normalplay():
             break
         #Vertical check
         elif symbols[0][i] == symbols[1][i] and symbols[2][i]=="" and not symbols[0][i] == "":
-            buttons[2][i].config(text=player,command=lambda i=2, j=i: None)
+            buttons[2][i].config(text=player,command=lambda i=i, j=i: None)
             symbols[2][i] = player
             AI_played = True
             break
         elif symbols[2][i] == symbols[0][i] and symbols[1][i]=="" and not symbols[0][i] == "":
-            buttons[1][i].config(text=player,command=lambda i=1, j=i: None)
+            buttons[1][i].config(text=player,command=lambda i=i, j=i: None)
             symbols[1][i] = player
             AI_played = True
             break
         elif symbols[1][i] == symbols[2][i] and symbols[0][i]=="" and not symbols[2][i] == "":
-            buttons[0][i].config(text=player,command=lambda i=0, j=i: None)
+            buttons[0][i].config(text=player,command=lambda i=i, j=i: None)
             symbols[0][i] = player
             AI_played = True
             break
@@ -189,55 +191,55 @@ def hardplay():
         #Vertical check
         elif symbols[0][i] == symbols[1][i] and symbols[2][i]=="" and not symbols[0][i] == "":
             if symbols[0][i] == "O":
-                buttons[2][i].config(text=player,command=lambda i=2, j=i: None)
+                buttons[2][i].config(text=player,command=lambda i=i, j=i: None)
                 symbols[2][i] = player
                 AI_played = True
                 break
         elif symbols[2][i] == symbols[0][i] and symbols[1][i]=="" and not symbols[0][i] == "":
             if symbols[2][i] == "O":
-                buttons[1][i].config(text=player,command=lambda i=1, j=i: None)
+                buttons[1][i].config(text=player,command=lambda i=i, j=i: None)
                 symbols[1][i] = player
                 AI_played = True
                 break
         elif symbols[1][i] == symbols[2][i] and symbols[0][i]=="" and not symbols[2][i] == "":
             if symbols[1][i] == "O":
-                buttons[0][i].config(text=player,command=lambda i=0, j=i: None)
+                buttons[0][i].config(text=player,command=lambda i=i, j=i: None)
                 symbols[0][i] = player
                 AI_played = True
                 break
         elif symbols[0][0] == symbols[1][1] and symbols[2][2] == "" and not symbols[0][0] == "":
             if symbols[1][1] == "O":
-                buttons[2][2].config(text=player,command=lambda i=0, j=i: None)
+                buttons[2][2].config(text=player,command=lambda i=i, j=i: None)
                 symbols[2][2] = player
                 AI_played = True
                 break
         elif symbols[0][2] == symbols[1][1] and symbols[2][0] == "" and not symbols[0][2] == "":
             if symbols[1][1] == "O":
-                buttons[2][0].config(text=player,command=lambda i=0, j=i: None)
+                buttons[2][0].config(text=player,command=lambda i=i, j=i: None)
                 symbols[2][0] = player
                 AI_played = True
                 break
         elif symbols[0][0] == symbols[2][2] and symbols[1][1] == "" and not symbols[0][0] == "":
             if symbols[2][2] == "O":
-                buttons[1][1].config(text=player,command=lambda i=0, j=i: None)
+                buttons[1][1].config(text=player,command=lambda i=i, j=i: None)
                 symbols[1][1] = player
                 AI_played = True
                 break
         elif symbols[0][2] == symbols[2][0] and symbols[1][1] == "" and not symbols[0][2] == "":
             if symbols[2][0] == "O":
-                buttons[1][1].config(text=player,command=lambda i=0, j=i: None)
+                buttons[1][1].config(text=player,command=lambda i=i, j=i: None)
                 symbols[1][1] = player
                 AI_played = True
                 break
         elif symbols[1][1] == symbols[2][2] and symbols[0][0] == "" and not symbols[1][1] == "":
             if symbols[2][2] == "O":
-                buttons[0][0].config(text=player,command=lambda i=0, j=i: None)
+                buttons[0][0].config(text=player,command=lambda i=i, j=i: None)
                 symbols[0][0] = player
                 AI_played = True
                 break
         elif symbols[1][1] == symbols[2][0] and symbols[0][2] == "" and not symbols[1][1] == "":
             if symbols[2][0] == "O":
-                buttons[0][2].config(text=player,command=lambda i=0, j=i: None)
+                buttons[0][2].config(text=player,command=lambda i=i, j=i: None)
                 symbols[0][2] = player
                 AI_played = True
                 break
@@ -261,47 +263,47 @@ def hardplay():
                 break
             #Vertical check
             elif symbols[0][i] == symbols[1][i] and symbols[2][i]=="" and not symbols[0][i] == "":
-                buttons[2][i].config(text=player,command=lambda i=2, j=i: None)
+                buttons[2][i].config(text=player,command=lambda i=i, j=i: None)
                 symbols[2][i] = player
                 AI_played = True
                 break
             elif symbols[2][i] == symbols[0][i] and symbols[1][i]=="" and not symbols[0][i] == "":
-                buttons[1][i].config(text=player,command=lambda i=1, j=i: None)
+                buttons[1][i].config(text=player,command=lambda i=i, j=i: None)
                 symbols[1][i] = player
                 AI_played = True
                 break
             elif symbols[1][i] == symbols[2][i] and symbols[0][i]=="" and not symbols[2][i] == "":
-                buttons[0][i].config(text=player,command=lambda i=0, j=i: None)
+                buttons[0][i].config(text=player,command=lambda i=i, j=i: None)
                 symbols[0][i] = player
                 AI_played = True
                 break
             elif symbols[0][0] == symbols[1][1] and symbols[2][2] == "" and not symbols[0][0] == "":
-                    buttons[2][2].config(text=player,command=lambda i=0, j=i: None)
+                    buttons[2][2].config(text=player,command=lambda i=i, j=i: None)
                     symbols[2][2] = player
                     AI_played = True
                     break
             elif symbols[0][2] == symbols[1][1] and symbols[2][0] == "" and not symbols[0][2] == "":
-                    buttons[2][0].config(text=player,command=lambda i=0, j=i: None)
+                    buttons[2][0].config(text=player,command=lambda i=i, j=i: None)
                     symbols[2][0] = player
                     AI_played = True
                     break
             elif symbols[0][0] == symbols[2][2] and symbols[1][1] == "" and not symbols[0][0] == "":
-                    buttons[1][1].config(text=player,command=lambda i=0, j=i: None)
+                    buttons[1][1].config(text=player,command=lambda i=i, j=i: None)
                     symbols[1][1] = player
                     AI_played = True
                     break
             elif symbols[0][2] == symbols[2][0] and symbols[1][1] == "" and not symbols[0][2] == "":
-                    buttons[1][1].config(text=player,command=lambda i=0, j=i: None)
+                    buttons[1][1].config(text=player,command=lambda i=i, j=i: None)
                     symbols[1][1] = player
                     AI_played = True
                     break
             elif symbols[1][1] == symbols[2][2] and symbols[0][0] == "" and not symbols[1][1] == "":
-                    buttons[0][0].config(text=player,command=lambda i=0, j=i: None)
+                    buttons[0][0].config(text=player,command=lambda i=i, j=i: None)
                     symbols[0][0] = player
                     AI_played = True
                     break
             elif symbols[1][1] == symbols[2][0] and symbols[0][2] == "" and not symbols[1][1] == "":
-                    buttons[0][2].config(text=player,command=lambda i=0, j=i: None)
+                    buttons[0][2].config(text=player,command=lambda i=i, j=i: None)
                     symbols[0][2] = player
                     AI_played = True
                     break
@@ -374,55 +376,55 @@ def impossibleplay():
         #Vertical check
         elif symbols[0][i] == symbols[1][i] and symbols[2][i]=="" and not symbols[0][i] == "":
             if symbols[0][i] == "O":
-                buttons[2][i].config(text=player,command=lambda i=2, j=i: None)
+                buttons[2][i].config(text=player,command=lambda i=i, j=i: None)
                 symbols[2][i] = player
                 AI_played = True
                 break
         elif symbols[2][i] == symbols[0][i] and symbols[1][i]=="" and not symbols[0][i] == "":
             if symbols[2][i] == "O":
-                buttons[1][i].config(text=player,command=lambda i=1, j=i: None)
+                buttons[1][i].config(text=player,command=lambda i=i, j=i: None)
                 symbols[1][i] = player
                 AI_played = True
                 break
         elif symbols[1][i] == symbols[2][i] and symbols[0][i]=="" and not symbols[2][i] == "":
             if symbols[1][i] == "O":
-                buttons[0][i].config(text=player,command=lambda i=0, j=i: None)
+                buttons[0][i].config(text=player,command=lambda i=i, j=i: None)
                 symbols[0][i] = player
                 AI_played = True
                 break
         elif symbols[0][0] == symbols[1][1] and symbols[2][2] == "" and not symbols[0][0] == "":
             if symbols[1][1] == "O":
-                buttons[2][2].config(text=player,command=lambda i=0, j=i: None)
+                buttons[2][2].config(text=player,command=lambda i=i, j=i: None)
                 symbols[2][2] = player
                 AI_played = True
                 break
         elif symbols[0][2] == symbols[1][1] and symbols[2][0] == "" and not symbols[0][2] == "":
             if symbols[1][1] == "O":
-                buttons[2][0].config(text=player,command=lambda i=0, j=i: None)
+                buttons[2][0].config(text=player,command=lambda i=i, j=i: None)
                 symbols[2][0] = player
                 AI_played = True
                 break
         elif symbols[0][0] == symbols[2][2] and symbols[1][1] == "" and not symbols[0][0] == "":
             if symbols[2][2] == "O":
-                buttons[1][1].config(text=player,command=lambda i=0, j=i: None)
+                buttons[1][1].config(text=player,command=lambda i=i, j=i: None)
                 symbols[1][1] = player
                 AI_played = True
                 break
         elif symbols[0][2] == symbols[2][0] and symbols[1][1] == "" and not symbols[0][2] == "":
             if symbols[2][0] == "O":
-                buttons[1][1].config(text=player,command=lambda i=0, j=i: None)
+                buttons[1][1].config(text=player,command=lambda i=i, j=i: None)
                 symbols[1][1] = player
                 AI_played = True
                 break
         elif symbols[1][1] == symbols[2][2] and symbols[0][0] == "" and not symbols[1][1] == "":
             if symbols[2][2] == "O":
-                buttons[0][0].config(text=player,command=lambda i=0, j=i: None)
+                buttons[0][0].config(text=player,command=lambda i=i, j=i: None)
                 symbols[0][0] = player
                 AI_played = True
                 break
         elif symbols[1][1] == symbols[2][0] and symbols[0][2] == "" and not symbols[1][1] == "":
             if symbols[2][0] == "O":
-                buttons[0][2].config(text=player,command=lambda i=0, j=i: None)
+                buttons[0][2].config(text=player,command=lambda i=i, j=i: None)
                 symbols[0][2] = player
                 AI_played = True
                 break
@@ -446,47 +448,47 @@ def impossibleplay():
                 break
             #Vertical check
             elif symbols[0][i] == symbols[1][i] and symbols[2][i]=="" and not symbols[0][i] == "":
-                buttons[2][i].config(text=player,command=lambda i=2, j=i: None)
+                buttons[2][i].config(text=player,command=lambda i=i, j=i: None)
                 symbols[2][i] = player
                 AI_played = True
                 break
             elif symbols[2][i] == symbols[0][i] and symbols[1][i]=="" and not symbols[0][i] == "":
-                buttons[1][i].config(text=player,command=lambda i=1, j=i: None)
+                buttons[1][i].config(text=player,command=lambda i=i, j=i: None)
                 symbols[1][i] = player
                 AI_played = True
                 break
             elif symbols[1][i] == symbols[2][i] and symbols[0][i]=="" and not symbols[2][i] == "":
-                buttons[0][i].config(text=player,command=lambda i=0, j=i: None)
+                buttons[0][i].config(text=player,command=lambda i=i, j=i: None)
                 symbols[0][i] = player
                 AI_played = True
                 break
             elif symbols[0][0] == symbols[1][1] and symbols[2][2] == "" and not symbols[0][0] == "":
-                    buttons[2][2].config(text=player,command=lambda i=0, j=i: None)
+                    buttons[2][2].config(text=player,command=lambda i=i, j=i: None)
                     symbols[2][2] = player
                     AI_played = True
                     break
             elif symbols[0][2] == symbols[1][1] and symbols[2][0] == "" and not symbols[0][2] == "":
-                    buttons[2][0].config(text=player,command=lambda i=0, j=i: None)
+                    buttons[2][0].config(text=player,command=lambda i=i, j=i: None)
                     symbols[2][0] = player
                     AI_played = True
                     break
             elif symbols[0][0] == symbols[2][2] and symbols[1][1] == "" and not symbols[0][0] == "":
-                    buttons[1][1].config(text=player,command=lambda i=0, j=i: None)
+                    buttons[1][1].config(text=player,command=lambda i=i, j=i: None)
                     symbols[1][1] = player
                     AI_played = True
                     break
             elif symbols[0][2] == symbols[2][0] and symbols[1][1] == "" and not symbols[0][2] == "":
-                    buttons[1][1].config(text=player,command=lambda i=0, j=i: None)
+                    buttons[1][1].config(text=player,command=lambda i=i, j=i: None)
                     symbols[1][1] = player
                     AI_played = True
                     break
             elif symbols[1][1] == symbols[2][2] and symbols[0][0] == "" and not symbols[1][1] == "":
-                    buttons[0][0].config(text=player,command=lambda i=0, j=i: None)
+                    buttons[0][0].config(text=player,command=lambda i=i, j=i: None)
                     symbols[0][0] = player
                     AI_played = True
                     break
             elif symbols[1][1] == symbols[2][0] and symbols[0][2] == "" and not symbols[1][1] == "":
-                    buttons[0][2].config(text=player,command=lambda i=0, j=i: None)
+                    buttons[0][2].config(text=player,command=lambda i=i, j=i: None)
                     symbols[0][2] = player
                     AI_played = True
                     break
@@ -498,20 +500,28 @@ def impossibleplay():
         spot2 = random.randint(0, 2)
         if symbols[1][1] == player:
             if symbols[0][1] == "" and symbols[2][1] == "":
-                buttons[0][1].config(text=player,command=lambda i=0, j=i: None)
+                buttons[0][1].config(text=player,command=lambda i=i, j=i: None)
                 symbols[0][1] = player
                 AI_played = True
             elif symbols[1][0] == "" and symbols [1][2] == "":
-                buttons[1][0].config(text=player,command=lambda i=0, j=i: None)
+                buttons[1][0].config(text=player,command=lambda i=i, j=i: None)
                 symbols[1][0] = player
                 AI_played = True
-            elif not symbols[1][0] == "" or not symbols[2][0] == "" and not symbols[0][1] == "" or not symbols[0][2] == "":
-                buttons[0][0].config(text=player,command=lambda i=0, j=i: None)
+            elif (not symbols[1][0] == "" or not symbols[2][0] == "") and (not symbols[0][1] == "" or not symbols[0][2] == "") and symbols[1][0] == "" and symbols[0][0] == "":
+                buttons[0][0].config(text=player,command=lambda i=i, j=i: None)
                 symbols[0][0] = player
                 AI_played = True
-            elif not symbols[1][2] == "" or not symbols[1][2] == "" and not symbols[2][1] == "" :
-                buttons[2][2].config(text=player,command=lambda i=0, j=i: None)
+            elif (not symbols[2][0] == "" or not symbols[2][1] == "") and (not symbols[0][2] == "" or not symbols[1][2] == "") and symbols[2][2] == "":
+                buttons[2][2].config(text=player,command=lambda i=i, j=i: None)
                 symbols[2][2] = player
+                AI_played = True
+            elif (not symbols[1][0] == "" or not symbols[0][0] == "") and (not symbols[2][2] == "" or not symbols[2][1] == "") and symbols[2][0] == "":
+                buttons[2][0].config(text=player,command=lambda i=i, j=i: None)
+                symbols[2][0] = player
+                AI_played = True
+            elif (not symbols[1][2] == "" or not symbols[2][2] == "") and (not symbols[0][1] == "" or not symbols[0][0] == "") and symbols[0][2] == "":
+                buttons[0][2].config(text=player,command=lambda i=i, j=i: None)
+                symbols[0][2] = player
                 AI_played = True
             elif symbols[spot1][spot2] == "":
                 buttons[spot1][spot2].config(text=player,command=lambda i=spot1, j=spot2: None)
@@ -523,9 +533,35 @@ def impossibleplay():
                     print("tie")
                     break
         elif symbols[1][1] == "":
-                buttons[1][1].config(text=player,command=lambda i=0, j=i: None)
+                buttons[1][1].config(text=player,command=lambda i=i, j=i: None)
                 symbols[1][1] = player
                 AI_played = True
+        elif not symbols[1][1] == player and not symbols[1][1] == "":
+            if symbols[0][0] == "":
+                buttons[0][0].config(text=player,command=lambda i=i, j=i: None)
+                symbols[0][0] = player    
+                AI_played = True
+            elif symbols[0][2] == "":
+                buttons[0][2].config(text=player,command=lambda i=i, j=i: None)
+                symbols[0][2] = player
+                AI_played = True
+            elif symbols[2][2] == "":
+                buttons[2][2].config(text=player,command=lambda i=i, j=i: None)
+                symbols[2][2] = player
+                AI_played = True
+            elif symbols[2][0] == "":
+                buttons[2][0].config(text=player,command=lambda i=i, j=i: None)
+                symbols[2][0] = player
+                AI_played = True
+            elif symbols[spot1][spot2] == "":
+                buttons[spot1][spot2].config(text=player,command=lambda i=spot1, j=spot2: None)
+                symbols[spot1][spot2] = player
+                AI_played = True
+                print("test")
+            else:
+                if turn >= 9:
+                    print("tie")
+                    break
         elif symbols[spot1][spot2] == "":
             buttons[spot1][spot2].config(text=player,command=lambda i=spot1, j=spot2: None)
             symbols[spot1][spot2] = player
@@ -557,12 +593,23 @@ def impossibleplay():
     
 
 def winner():
-    global player, turn
+    global player, turn, symbols, gameend
     for i in range(3):
         for j in range(3):
             buttons[i][j].config(text=player,command=lambda i=i, j=j: None)
-    turn = 0
+    gameend = True
 
+def reset():
+    global turn, symbols, gameend
+    if gameend or turn >= 9:
+        time.sleep(1)
+        turn = 0
+        symbols = [['','',''],['','',''],['','','']]
+        for i in range(3):
+            for j in range(3):
+                buttons[i][j].config(text="", command=lambda i=i, j=j: click(i, j))
+        gameend = False
+    window.after(100, reset)
 
 def playercheck():
     #check who plays
@@ -587,5 +634,6 @@ for i in range(3):
         row.append(button)
     buttons.append(row)
 
+window.after(0, reset)
 window.after(0, playercheck)
 window.mainloop()
