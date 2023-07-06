@@ -1,86 +1,69 @@
-
 import tkinter as tk
-import time
 
 window = tk.Tk()
 window.title("TIKTAKTOE")
+
 buttons = []
-symbols = [['','',''],['','',''],['','','']]
-player = "X"
-turn = 0
-possible_enemy = ["player","KI"]
-enemy = possible_enemy[0]
-AI_played = False
-gameend = False
+board = [['', '', ''], ['', '', ''], ['', '', '']]
+players = ["X", "O"]
+current_player = players[0]
 
 def click(i, j):
-    global turn, player, symbols
-    if turn % 2 == 0:
-        player = "X"
-    else:
-        player = "O"
-    buttons[i][j].config(text=player,command=lambda i=i, j=j: None)
-    symbols[i][j] = player
-    turn = turn + 1
-    #check for winners
-    for i in range(3):
-        if symbols[i][0] == symbols[i][1] and symbols[i][0] == symbols[i][2] and not symbols[i][0]== "":
-            print(player +" won")
-            winner()
-            break
-        elif symbols[0][i] == symbols[1][i] and symbols[0][i] == symbols[2][i] and not symbols[0][i]== "":
-            print(player +" won")
-            winner()
-            break
-        elif symbols[0][0] == symbols[1][1] and symbols[1][1] == symbols[2][2] and not symbols [1][1]== "":
-            print(player +" won")
-            winner()
-            break
-        elif symbols[0][2] == symbols[1][1] and symbols[1][1] == symbols[2][0] and not symbols [1][1]== "":
-            print(player +" won")
-            winner()
-            break
+    global current_player
+    if board[i][j] == '':
+        buttons[i][j].config(text=current_player, state=tk.DISABLED)
+        board[i][j] = current_player
+        check_winner()
+        current_player = players[1] if current_player == players[0] else players[0]
+
+
+
+def check_winner():
+    if (
+        (board[0][0] == board[0][1] == board[0][2] != '') or
+        (board[1][0] == board[1][1] == board[1][2] != '') or
+        (board[2][0] == board[2][1] == board[2][2] != '') or
+        (board[0][0] == board[1][0] == board[2][0] != '') or
+        (board[0][1] == board[1][1] == board[2][1] != '') or
+        (board[0][2] == board[1][2] == board[2][2] != '') or
+        (board[0][0] == board[1][1] == board[2][2] != '') or
+        (board[0][2] == board[1][1] == board[2][0] != '')
+    ):
+        print(current_player + " won")
+        winner()
+    elif((board[0][0] and board[0][1] and board[0][2] 
+          and board[1][0] and board[1][1] and board[1][2]
+          and board[1][0] and board[1][1] and board[1][2]) != ''):
+        tie()
+
 
 def winner():
-    global player, turn, symbols, gameend
     for i in range(3):
         for j in range(3):
-            buttons[i][j].config(text=player,command=lambda i=i, j=j: None)
-    gameend = True
+            buttons[i][j].config(text=current_player, state=tk.DISABLED)
+    window.after(1000, reset)
+
+
+def tie():
+    for i in range(3):
+        for j in range(3):
+            buttons[i][j].config(text="tie", state=tk.DISABLED)
+    window.after(1000, reset)
 
 def reset():
-    global turn, symbols, gameend
-    if gameend or turn >= 9:
-        time.sleep(1)
-        turn = 0
-        symbols = [['','',''],['','',''],['','','']]
-        for i in range(3):
-            for j in range(3):
-                buttons[i][j].config(text="", command=lambda i=i, j=j: click(i, j))
-        gameend = False
-    window.after(100, reset)
+    for i in range(3):
+        for j in range(3):
+            buttons[i][j].config(text="", state=tk.NORMAL)
+            board[i][j] = ''
 
-def playercheck():
-    #check who plays
-    if turn % 2:
-        if enemy == "player":
-            None
-        if enemy == "KI":
-            KIplay()
-    window.after(100,playercheck)
-            
+def create_buttons():
+    for i in range(3):
+        row = []
+        for j in range(3):
+            button = tk.Button(window, text="", font=("Arial", 40), width=5, height=2, command=lambda i=i, j=j: click(i, j))
+            button.grid(row=i, column=j)
+            row.append(button)
+        buttons.append(row)
 
-def KIplay():
-    None
-
-for i in range(3):
-    row = []
-    for j in range(3):
-        button = tk.Button(window, text="", font=("Arial", 40), width=5, height=2,command=lambda i=i, j=j: click(i, j))
-        button.grid(row=i, column=j)
-        row.append(button)
-    buttons.append(row)
-
-window.after(0, reset)
-window.after(0, playercheck)
+create_buttons()
 window.mainloop()
